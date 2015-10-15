@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  path.NZN{
+    fill:#cdc;
+  }
+  path.NZS{
+    fill:#dcd;
+  }
+  path.NZA{
+    fill:#cdd;
+  }
+  path.place{
+    fill:black;
+  }
+  text.place-label{
+    font-size:9pt;
+  }
+  text.region-label{
+    fill: gray;
+    fill-opacity: .5;
+    font-size: 20pt;
+    font-weight: 300;
+    text-anchor: middle;
+  }
+</style>
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script>
+    // create the SVG region
+    var width = 600, height =900;
+    var svg = d3.select("body")
+        .append("svg")
+        .attr({"width":width, "height":height});
+    // create the projection
+    // Note that this uses the transverse mercator, which is the standard for mapping New Zealand (which is small and near a pole)
+    var projection = d3.geo.transverseMercator()
+        .scale(3200)
+        .rotate([188,40.5])
+        .translate([width/2, height/2]);
+    // create the path tool
+    var path = d3.geo.path()
+      .projection(projection)
+      .pointRadius(3);
+    // grab the geography from the server
+    d3.json("nz.json",function (nz) {
+      var subunits = topojson.feature(nz, nz.objects.nzl_subunits),
+          places = topojson.feature(nz, nz.objects.nz_places);
+      // This draws the actual land masses
+      // note the argument to data() where we are converting the TopoJSON data by extracting the
+      // features that we want
+      svg.selectAll("path")
+          .data(subunits.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
+          .attr("class", function (d) {return d.id;});
+      // The json data also includes a collection of points of interest (major cities) as another feature
+      // those are also convereted to paths, this time, becoming points
+      svg.append("path")
+          .datum(places)
+          .attr("d", path)
+          .attr("class","place")
+      // we run through that same data again, this time producing labels for the points
+      svg.selectAll(".place-label")
+          .data(places.features)
+        .enter().append("text")
+          .attr("class", "place-label")
+          .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+        .attr("dx", ".5em")
+          .text(function(d) { return d.properties.name; });
+      // finally, we add in some labels for the major land masses (note which feature we are dealing with)
+      var labels = svg.selectAll(".region-label")
+          .data(subunits.features)
+        .enter()
+      .append("text")
+          .attr("class", function(d) { return "region-label " + d.id; })
+          .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .text(function(d) { return d.properties.name; });
+    });
+  </script>
+</body>
