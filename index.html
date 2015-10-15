@@ -16,7 +16,7 @@
   path.place{
     fill:black;
   }
-  text#place-label{
+  text.place-label{
     font-size:9pt;
   }
   text.region-label{
@@ -70,10 +70,10 @@
           .attr("d", path)
           .attr("class","place")
       // we run through that same data again, this time producing labels for the points
-      svg.selectAll("#place-label")
+      svg.selectAll(".place-label")
           .data(places.features)
         .enter().append("text")
-          .attr("id", "place-label")
+          .attr("class", function(d) { return "place-label " + d.properties.name })
           .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
         .attr("dx", ".5em")
           .text(function(d) { return d.properties.name; });
