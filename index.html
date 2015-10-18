@@ -29,6 +29,9 @@
     font-weight: 300;
     text-anchor: middle;
   }
+  circle.refugee-location {
+    fill: black;
+  }
 </style>
 <body>
   <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -92,25 +95,30 @@
           .attr("dy", ".35em")
           .text(function(d) { return d.properties.name; });
 
-      svg.append("circle")
-        .attr("class", "refugee-location")
-        .attr("cx", 25)
-        .attr("cy", 25)
-        .attr("r", 25)
-        .attr("fill", "red");
 
-    });
-
-    $(document).ready(function() {
-      $(".refugee-location").tipsy({
-        gravity: 'w',
-        html: true,
-        title: function() {
-          var d = this.__data__, c = colors(d.i);
-          return 'Hi there! My color is <span style="color:' + c + '">' + c + '</span>';
-        }
+      svg.selectAll(".Auckland").each(function() {
+        var t = document.createElement("circle");
+        this.parentNode.insertBefore(t, this.nextSibling);
       });
+
+      svg.selectAll("circle")
+        .attr("class", "refugee-location")
+        .attr("cx", 30)
+        .attr("cy", 30)
+        .attr("r", 30);
     });
+
+
+    // $(document).ready(function() {
+      // $(".refugee-location").tipsy({
+      //   gravity: 'w',
+      //   html: true,
+      //   title: function() {
+      //     var d = this.__data__, c = colors(d.i);
+      //     return 'Hi there! My color is <span style="color:' + c + '">' + c + '</span>';
+      //   }
+      // });
+    // });
 
 
     // $(window).load(function() {
