@@ -29,7 +29,7 @@
     font-weight: 300;
     text-anchor: middle;
   }
-  circle.refugee-location-1 {
+  circle {
     fill: #0066CC;
   }
   rect.refugee-rect {
@@ -39,11 +39,10 @@
   }
 </style>
 <body>
+
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="jquery.tipsy.js"></script>
-  <link href="tipsy.css" rel="stylesheet" type="text/css" />
   <h1>Refugee Settlement in New Zealand</h1>
   <h2>2006-2015</h3>
   <h5>Source: <a href="http://www.immigration.govt.nz/NR/rdonlyres/F4C1C566-F1B8-469A-A1B4-D48345BA283E/0/RQBResettlementStatPak.pdf">Immigration New Zealand</a></h5>
@@ -102,7 +101,6 @@
           .text(function(d) { return d.properties.name; });
 
       svg.append("circle")
-          .attr("class", "refugee-location-1")
           .attr("cx", 410)
           .attr("cy", 150)
           .attr("r", 10)
@@ -124,6 +122,137 @@
                 .text("Auckland: 2255");
           });
 
+      svg.append("circle")
+          .attr("cx", 445)
+          .attr("cy", 215)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 150)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 200)
+                .text("Waikato: 641");
+          });
+
+      svg.append("circle")
+          .attr("cx", 505)
+          .attr("cy", 315)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 200)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 250)
+                .text("Hawkes Bay: 3");
+          });
+
+      svg.append("circle")
+          .attr("cx", 445)
+          .attr("cy", 360)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 220)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 270)
+                .text("Manuwatu: 841");
+          });
+
+      svg.append("circle")
+          .attr("cx", 420)
+          .attr("cy", 380)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 250)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 300)
+                .text("Wellington: 1679");
+          });
+
+      svg.append("circle")
+          .attr("cx", 350)
+          .attr("cy", 410)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 300)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 350)
+                .text("Nelson: 680");
+          });
+
+      svg.append("circle")
+          .attr("cx", 320)
+          .attr("cy", 505)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 30)
+                .attr("y", 370)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 75)
+                .attr("y", 420)
+                .text("Canterbury: 489");
+          });
     });
 
 
@@ -135,4 +264,4 @@
     //   })
     // });
   </script>
-  </body>
+</body>
