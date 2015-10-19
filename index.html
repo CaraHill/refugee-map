@@ -101,21 +101,6 @@
           .attr("dy", ".35em")
           .text(function(d) { return d.properties.name; });
 
-      // svg.selectAll(".Auckland").each(function() {
-      //   var t = document.createElement("circle");
-      //   this.parentNode.insertBefore(t, this.nextSibling);
-      // });
-
-      // var coordinates = projection([6850,8653]);
-
-      // svg.selectAll("circle")
-      //   .attr("class", "refugee-location")
-      //   .attr("stroke", "black")
-      //   .attr("fill", "green")
-      //   .attr("cx", coordinates[0])
-      //   .attr("cy", coordinates[1])
-      //   .attr("r", 30);
-
       svg.append("circle")
           .attr("class", "refugee-location-1")
           .attr("cx", 410)
@@ -142,17 +127,6 @@
     });
 
 
-    // $(document).ready(function() {
-      // $(".refugee-location").tipsy({
-      //   gravity: 'w',
-      //   html: true,
-      //   title: function() {
-      //     var d = this.__data__, c = colors(d.i);
-      //     return 'Hi there! My color is <span style="color:' + c + '">' + c + '</span>';
-      //   }
-      // });
-    // });
-
 
     // $(window).load(function() {
     //   $(".refugee-location").on("click", function() {
@@ -161,7 +135,4 @@
     //   })
     // });
   </script>
-    <canvas width="800" height="900">
-      <!-- <img src="New_Zealand.png" height="700" width="700"> -->
-    </canvas>
   </body>
