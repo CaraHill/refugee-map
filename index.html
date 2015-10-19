@@ -29,8 +29,8 @@
     font-weight: 300;
     text-anchor: middle;
   }
-  circle.refugee-location {
-    fill: black;
+  circle.refugee-location-1 {
+    fill: #0033CC;
   }
 </style>
 <body>
@@ -58,6 +58,7 @@
     var path = d3.geo.path()
       .projection(projection)
       .pointRadius(3);
+
     // grab the geography from the server
     d3.json("nz.json",function (nz) {
       var subunits = topojson.feature(nz, nz.objects.nzl_subunits),
@@ -95,17 +96,30 @@
           .attr("dy", ".35em")
           .text(function(d) { return d.properties.name; });
 
+      // svg.selectAll(".Auckland").each(function() {
+      //   var t = document.createElement("circle");
+      //   this.parentNode.insertBefore(t, this.nextSibling);
+      // });
 
-      svg.selectAll(".Auckland").each(function() {
-        var t = document.createElement("circle");
-        this.parentNode.insertBefore(t, this.nextSibling);
-      });
+      // var coordinates = projection([6850,8653]);
 
-      svg.selectAll("circle")
-        .attr("class", "refugee-location")
-        .attr("cx", 30)
-        .attr("cy", 30)
-        .attr("r", 30);
+      // svg.selectAll("circle")
+      //   .attr("class", "refugee-location")
+      //   .attr("stroke", "black")
+      //   .attr("fill", "green")
+      //   .attr("cx", coordinates[0])
+      //   .attr("cy", coordinates[1])
+      //   .attr("r", 30);
+
+      svg.append("circle")
+          .attr("class", "refugee-location-1")
+          .attr("cx", 410)
+          .attr("cy", 150)
+          .attr("r", 10)
+          .on("click", function() {
+            alert("Hello!");
+          });
+
     });
 
 
@@ -122,8 +136,13 @@
 
 
     // $(window).load(function() {
-    //   $(".place-label Auckland").append("<div id='ref-location'>" + "</div>")
-    //   alert("Hello!")
+    //   $(".refugee-location").on("click", function() {
+
+    //     alert("Hello!")
+    //   })
     // });
   </script>
+    <canvas width="800" height="900">
+      <!-- <img src="New_Zealand.png" height="700" width="700"> -->
+    </canvas>
   </body>
