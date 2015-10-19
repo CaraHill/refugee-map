@@ -32,16 +32,15 @@
   circle {
     fill: #0066CC;
   }
-  rect.total {
+  rect.total, rect.reset {
     fill: #C2C2C2;
-    font-color: black;
   }
   rect {
     stroke: black;
     fill:#FFF;
   }
-  text.refugee-stats {
-
+  text.total-text, text.reset-text {
+    font-size: 10pt;
   }
 </style>
 <body>
@@ -116,7 +115,8 @@
           .attr("width", 50)
           .attr("height", 25);
       svg.append("text")
-          .attr("x", 13)
+          .attr("class", "total-text")
+          .attr("x", 15)
           .attr("y", 23)
           .text("Total")
           .on("click", function() {
@@ -289,6 +289,24 @@
                 .attr("x", 75)
                 .attr("y", 420)
                 .text("Canterbury: 489");
+          });
+
+      svg.append("rect")
+          .attr("class", "reset")
+          .attr("x", 75)
+          .attr("y", 5)
+          .attr("rx", 5)
+          .attr("ry", 5)
+          .attr("width", 50)
+          .attr("height", 25);
+      svg.append("text")
+          .attr("class", "reset-text")
+          .attr("x", 85)
+          .attr("y", 23)
+          .text("Reset")
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
           });
 
     });
