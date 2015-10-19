@@ -32,10 +32,15 @@
   circle {
     fill: #0066CC;
   }
-  rect.refugee-rect {
+  circle.total {
+    fill: red;
+  }
+  rect {
+    stroke: black;
     fill:#FFF;
   }
   text.refugee-stats {
+
   }
 </style>
 <body>
@@ -46,9 +51,10 @@
   <h1>Refugee Settlement in New Zealand</h1>
   <h2>2006-2015</h3>
   <h5>Source: <a href="http://www.immigration.govt.nz/NR/rdonlyres/F4C1C566-F1B8-469A-A1B4-D48345BA283E/0/RQBResettlementStatPak.pdf">Immigration New Zealand</a></h5>
+  <p>Click on a blue dot to see the number of refugees settled in that region since 2006.</p>
   <script>
     // create the SVG region
-    var width = 600, height = 700;
+    var width = 1200, height = 700;
     var svg = d3.select("body")
         .append("svg")
         .attr({"width":width, "height":height});
@@ -101,7 +107,30 @@
           .text(function(d) { return d.properties.name; });
 
       svg.append("circle")
-          .attr("cx", 410)
+          .attr("class", "total")
+          .attr("cx", 660)
+          .attr("cy", 320)
+          .attr("r", 10)
+          .on("click", function() {
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 150)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 500)
+                .attr("height", 75);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 75)
+                .attr("y", 195)
+                .text("Total number of refugees settled in New Zealand since 2006: 6588");
+          });
+
+      svg.append("circle")
+          .attr("cx", 710)
           .attr("cy", 150)
           .attr("r", 10)
           .on("click", function() {
@@ -118,12 +147,12 @@
             svg.append("text")
                 .attr("class", "refugee-stats")
                 .attr("x", 95)
-                .attr("y", 105)
+                .attr("y", 100)
                 .text("Auckland: 2255");
           });
 
       svg.append("circle")
-          .attr("cx", 445)
+          .attr("cx", 745)
           .attr("cy", 215)
           .attr("r", 10)
           .on("click", function() {
@@ -145,7 +174,7 @@
           });
 
       svg.append("circle")
-          .attr("cx", 505)
+          .attr("cx", 805)
           .attr("cy", 315)
           .attr("r", 10)
           .on("click", function() {
@@ -167,7 +196,7 @@
           });
 
       svg.append("circle")
-          .attr("cx", 445)
+          .attr("cx", 745)
           .attr("cy", 360)
           .attr("r", 10)
           .on("click", function() {
@@ -189,7 +218,7 @@
           });
 
       svg.append("circle")
-          .attr("cx", 420)
+          .attr("cx", 720)
           .attr("cy", 380)
           .attr("r", 10)
           .on("click", function() {
@@ -211,7 +240,7 @@
           });
 
       svg.append("circle")
-          .attr("cx", 350)
+          .attr("cx", 650)
           .attr("cy", 410)
           .attr("r", 10)
           .on("click", function() {
@@ -233,8 +262,8 @@
           });
 
       svg.append("circle")
-          .attr("cx", 320)
-          .attr("cy", 505)
+          .attr("cx", 610)
+          .attr("cy", 515)
           .attr("r", 10)
           .on("click", function() {
             svg.select(".refugee-rect").remove();
@@ -253,15 +282,7 @@
                 .attr("y", 420)
                 .text("Canterbury: 489");
           });
+
     });
-
-
-
-    // $(window).load(function() {
-    //   $(".refugee-location").on("click", function() {
-
-    //     alert("Hello!")
-    //   })
-    // });
   </script>
 </body>
