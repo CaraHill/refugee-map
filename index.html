@@ -30,7 +30,12 @@
     text-anchor: middle;
   }
   circle.refugee-location-1 {
-    fill: #0033CC;
+    fill: #0066CC;
+  }
+  rect.refugee-rect {
+    fill:#FFF;
+  }
+  text.refugee-stats {
   }
 </style>
 <body>
@@ -117,7 +122,21 @@
           .attr("cy", 150)
           .attr("r", 10)
           .on("click", function() {
-            alert("Hello!");
+            svg.select(".refugee-rect").remove();
+            svg.select(".refugee-stats").remove();
+            svg.append("rect")
+                .attr("class", "refugee-rect")
+                .attr("x", 50)
+                .attr("y", 50)
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("width", 200)
+                .attr("height", 100);
+            svg.append("text")
+                .attr("class", "refugee-stats")
+                .attr("x", 95)
+                .attr("y", 105)
+                .text("Auckland: 2255");
           });
 
     });
