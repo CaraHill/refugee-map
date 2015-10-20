@@ -10,13 +10,7 @@
   body {
     background-color: #E0F0FF;
   }
-  path.NZN{
-    fill:#cdc;
-  }
-  path.NZS{
-    fill:#cdc;
-  }
-  path.NZA{
+  path.NZN, path.NZS, path.NZA {
     fill:#cdc;
   }
   path.place{
@@ -35,15 +29,7 @@
   circle {
     fill: #0066CC;
   }
-  text.total-text {
-    font-size: 20pt;
-    font-weight: bold;
-  }
-  text.reset-text {
-    font-size: 20pt;
-    font-weight: bold;
-  }
-  text.refugee-stats {
+  text.total-text, text.reset-text, text.refugee-stats {
     font-size: 20pt;
     font-weight: bold;
   }
@@ -53,7 +39,6 @@
   }
 </style>
 <body>
-
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -61,6 +46,7 @@
   <h2>2006-2015</h3>
   <h5>Source: <a href="http://www.immigration.govt.nz/NR/rdonlyres/F4C1C566-F1B8-469A-A1B4-D48345BA283E/0/RQBResettlementStatPak.pdf">Immigration New Zealand</a></h5>
   <p>Click on a blue dot to see the number of refugees settled in that region since 2006.</p>
+  <p>Click on Total to see the number of refugees who have settled in New Zealand since 2006.</p>
   <script>
     // create the SVG region
     var width = 1200, height = 700;
@@ -115,7 +101,6 @@
           .attr("dy", ".35em")
           .text(function(d) { return d.properties.name; });
 
-      //Should this be bigger? Thicker? Should there be a note advising to click on it?
       svg.append("text")
           .attr("class", "total-text")
           .attr("x", 5)
@@ -135,6 +120,7 @@
           .attr("cy", 150)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -148,6 +134,7 @@
           .attr("cy", 213)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -161,6 +148,7 @@
           .attr("cy", 311)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -174,6 +162,7 @@
           .attr("cy", 361)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -187,6 +176,7 @@
           .attr("cy", 382)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -200,6 +190,7 @@
           .attr("cy", 407)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -213,6 +204,7 @@
           .attr("cy", 515)
           .attr("r", 8)
           .on("click", function() {
+            svg.select(".refugee-stats-total").remove();
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats")
@@ -223,7 +215,7 @@
 
       svg.append("text")
           .attr("class", "reset-text")
-          .attr("x", 480)
+          .attr("x", 100)
           .attr("y", 20)
           .text("Reset")
           .on("click", function() {
