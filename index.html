@@ -35,7 +35,12 @@
   circle {
     fill: #0066CC;
   }
-  text.total-text, text.reset-text {
+  text.total-text {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+  text.reset-text {
+    font-size: 20pt;
     font-weight: bold;
   }
   text.refugee-stats {
@@ -120,7 +125,7 @@
             svg.select(".refugee-stats").remove();
             svg.append("text")
                 .attr("class", "refugee-stats-total")
-                .attr("x", 60)
+                .attr("x", 40)
                 .attr("y", 250)
                 .text("Total number of refugees settled in New Zealand since 2006: 6588");
           });
@@ -216,10 +221,9 @@
                 .text("Canterbury: 489");
           });
 
-      // Could this be smaller and somewhere else on the page?
       svg.append("text")
           .attr("class", "reset-text")
-          .attr("x", 65)
+          .attr("x", 480)
           .attr("y", 20)
           .text("Reset")
           .on("click", function() {
