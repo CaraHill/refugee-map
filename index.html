@@ -29,7 +29,7 @@
   circle {
     fill: #0066CC;
   }
-  text.total-text, text.reset-text, text.refugee-stats {
+  text.total-text, text.refugee-stats {
     font-size: 20pt;
     font-weight: bold;
   }
@@ -45,45 +45,37 @@
   <h1>Refugee Settlement in New Zealand</h1>
   <h2>2006-2015</h3>
   <h5>Source: <a href="http://www.immigration.govt.nz/NR/rdonlyres/F4C1C566-F1B8-469A-A1B4-D48345BA283E/0/RQBResettlementStatPak.pdf">Immigration New Zealand</a></h5>
-  <p>Click on a blue dot to see the number of refugees settled in that region since 2006.</p>
-  <p>Click on Total to see the number of refugees who have settled in New Zealand since 2006.</p>
   <script>
-    // create the SVG region
     var width = 1200, height = 700;
     var svg = d3.select("body")
         .append("svg")
         .attr({"width":width, "height":height});
-    // create the projection
-    // Note that this uses the transverse mercator, which is the standard for mapping New Zealand (which is small and near a pole)
+
     var projection = d3.geo.transverseMercator()
         .scale(3200)
         .rotate([188,40.5])
         .translate([width/2, height/2]);
-    // create the path tool
+
     var path = d3.geo.path()
       .projection(projection)
       .pointRadius(3);
 
-    // grab the geography from the server
     d3.json("nz.json",function (nz) {
       var subunits = topojson.feature(nz, nz.objects.nzl_subunits),
           places = topojson.feature(nz, nz.objects.nz_places);
-      // This draws the actual land masses
-      // note the argument to data() where we are converting the TopoJSON data by extracting the
-      // features that we want
+
       svg.selectAll("path")
           .data(subunits.features)
           .enter()
           .append("path")
           .attr("d", path)
           .attr("class", function (d) {return d.id;});
-      // The json data also includes a collection of points of interest (major cities) as another feature
-      // those are also convereted to paths, this time, becoming points
+
       svg.append("path")
           .datum(places)
           .attr("d", path)
           .attr("class","place")
-      // we run through that same data again, this time producing labels for the points
+
       svg.selectAll(".place-label")
           .data(places.features)
         .enter().append("text")
@@ -91,7 +83,7 @@
           .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
         .attr("dx", ".5em")
           .text(function(d) { return d.properties.name; });
-      // finally, we add in some labels for the major land masses (note which feature we are dealing with)
+
       var labels = svg.selectAll(".region-label")
           .data(subunits.features)
         .enter()
@@ -102,18 +94,10 @@
           .text(function(d) { return d.properties.name; });
 
       svg.append("text")
-          .attr("class", "total-text")
-          .attr("x", 5)
-          .attr("y", 20)
-          .text("Total")
-          .on("click", function() {
-            svg.select(".refugee-stats").remove();
-            svg.append("text")
                 .attr("class", "refugee-stats-total")
                 .attr("x", 40)
                 .attr("y", 250)
                 .text("Total number of refugees settled in New Zealand since 2006: 6588");
-          });
 
       svg.append("circle")
           .attr("cx", 712)
@@ -211,16 +195,6 @@
                 .attr("x", 200)
                 .attr("y", 250)
                 .text("Canterbury: 489");
-          });
-
-      svg.append("text")
-          .attr("class", "reset-text")
-          .attr("x", 100)
-          .attr("y", 20)
-          .text("Reset")
-          .on("click", function() {
-            svg.select(".refugee-stats").remove();
-            svg.select(".refugee-stats-total").remove();
           });
 
     });
