@@ -46,6 +46,15 @@
     /*font-size: 15pt;*/
     font-weight: bold;
   }
+  text.refugee-stats {
+    font-size: 20pt;
+/*    text-anchor: middle;*/
+    font-weight: bold;
+  }
+  text.refugee-stats-total {
+    font-size: 15pt;
+    font-weight: bold;
+  }
 </style>
 <body>
 
@@ -128,40 +137,40 @@
           .on("click", function() {
             svg.select(".refugee-rect").remove();
             svg.select(".refugee-stats").remove();
-            svg.append("rect")
-                .attr("class", "refugee-rect")
-                .attr("x", 50)
-                .attr("y", 150)
-                .attr("rx", 20)
-                .attr("ry", 20)
-                .attr("width", 500)
-                .attr("height", 75);
+            // svg.append("rect")
+            //     .attr("class", "refugee-rect")
+            //     .attr("x", 50)
+            //     .attr("y", 150)
+            //     .attr("rx", 20)
+            //     .attr("ry", 20)
+            //     .attr("width", 500)
+            //     .attr("height", 75);
             svg.append("text")
-                .attr("class", "refugee-stats")
-                .attr("x", 80)
-                .attr("y", 195)
+                .attr("class", "refugee-stats-total")
+                .attr("x", 60)
+                .attr("y", 250)
                 .text("Total number of refugees settled in New Zealand since 2006: 6588");
           });
 
       svg.append("circle")
           .attr("cx", 710)
           .attr("cy", 150)
-          .attr("r", 10)
+          .attr("r", 8)
           .on("click", function() {
             svg.select(".refugee-rect").remove();
             svg.select(".refugee-stats").remove();
-            svg.append("rect")
-                .attr("class", "refugee-rect")
-                .attr("x", 50)
-                .attr("y", 50)
-                .attr("rx", 20)
-                .attr("ry", 20)
-                .attr("width", 200)
-                .attr("height", 100);
+            // svg.append("rect")
+            //     .attr("class", "refugee-rect")
+            //     .attr("x", 50)
+            //     .attr("y", 50)
+            //     .attr("rx", 20)
+            //     .attr("ry", 20)
+            //     .attr("width", 200)
+            //     .attr("height", 100);
             svg.append("text")
                 .attr("class", "refugee-stats")
-                .attr("x", 95)
-                .attr("y", 100)
+                .attr("x", 200)
+                .attr("y", 250)
                 .text("Auckland: 2255");
           });
 
@@ -313,8 +322,9 @@
           .attr("y", 20)
           .text("Reset")
           .on("click", function() {
-            svg.select(".refugee-rect").remove();
+            // svg.select(".refugee-rect").remove();
             svg.select(".refugee-stats").remove();
+            svg.select(".refugee-stats-total").remove();
           });
 
     });
