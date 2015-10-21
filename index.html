@@ -63,7 +63,10 @@
       .projection(projection)
       .pointRadius(3);
 
-    d3.json("nz.json",function (nz) {
+    d3.json("nz.json",function (error, nz) {
+
+      if (error) { console.error(error) }
+
       var subunits = topojson.feature(nz, nz.objects.nzl_subunits),
           places = topojson.feature(nz, nz.objects.nz_places);
 
